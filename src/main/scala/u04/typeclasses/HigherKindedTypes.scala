@@ -3,7 +3,6 @@ package u04.typeclasses
 object HigherKindedTypes:
 
   // 0-kinded types, that is, standard types
-
   trait FactorialModuleType:
     def factorial(n: Int): Int
 
@@ -13,7 +12,6 @@ object HigherKindedTypes:
   val f = BasicFactorialModule.factorial(5) 
 
   // 1-kinded types, that is, types generic over a 0-kinded type
-
   trait Showable[T]:
     def show(t: T): String
 
@@ -23,7 +21,6 @@ object HigherKindedTypes:
   val s = ShowableInt.show(5)
 
   // 2-kinded types, that is, types generic over a 1-kinded type
-
   trait Filterable[T[_]]:
     def filter[A](t: T[A])(f: A => Boolean): T[A]
 

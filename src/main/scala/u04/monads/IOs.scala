@@ -56,7 +56,7 @@ object IOs:
 
 @main def tryDrawGameApp =  
   import IOs.{*, given}, IO.*
-  import scala.util.Random.{nextInt => random} // preview of alias import...
+  import scala.util.Random.{nextInt => random} // alias import...
   
   enum Result:
     case Won, Lost
