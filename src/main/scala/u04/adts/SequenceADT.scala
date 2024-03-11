@@ -26,6 +26,6 @@ object SequenceADT:
     case Nil()      => seq2
 
 @main def trySequenceADT =
-  import SequenceADT.* // note single, import
+  import SequenceADT.* 
   val seq = cons(10, cons(20, cons(30, nil())))
   println(concat(seq, seq.map(_ + 1)))

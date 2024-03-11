@@ -6,7 +6,7 @@ import Sequence.*
 object SetADT:
   opaque type Set[A] = Sequence[A]
 
-  def fromSequence[A](s: Sequence[A]): Set[A] = s match
+  def fromSequence[A](seq: Sequence[A]): Set[A] = seq match
     case Cons(h, t) => Cons(h, fromSequence(t.remove(h)))
     case Nil()      => Nil()
 
