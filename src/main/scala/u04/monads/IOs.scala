@@ -28,7 +28,7 @@ object IOs:
 @main def tryMonadIO =
 
   // Input-output in Scala, though, imperative!
-  val s: String = scala.io.StdIn.readLine
+  val s: String = scala.io.StdIn.readLine()
   println(s)
   println(s.toInt)
 
@@ -36,7 +36,7 @@ object IOs:
   // Operations with side-effects are hidden in the monad
   import IOs.{*, given}, IO.*
 
-  val simpleInterativeComputation: IO[Int] = 
+  val simpleIterativeComputation: IO[Int] =
     for 
       s <- read()
       _ <- write("Thanks for providing: "+s)
@@ -46,7 +46,7 @@ object IOs:
     yield j  
 
   // desugared version
-  val simpleInterativeComputationByFlatMaps: IO[Int] = 
+  val simpleIterativeComputationByFlatMaps: IO[Int] =
     read()                            .flatMap(s => 
     write("Thanks for providing: "+s) .flatMap(_ =>
     compute(s.toInt)                  .flatMap(i =>
