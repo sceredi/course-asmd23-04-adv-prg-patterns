@@ -1,4 +1,4 @@
-package u04.adts
+package scala.u04.monads
 
 import org.scalacheck.Arbitrary.arbitrary
 import org.scalacheck.Prop.forAll
