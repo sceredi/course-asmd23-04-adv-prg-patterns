@@ -16,7 +16,7 @@ object Showables:
       case (a, b) => "(" + a.show() + ", " + b.show() + ")"
 
     def showSequence[A: Showable](seq: Sequence[A]): String = seq match
-      case Sequence.Cons(h, t) => "|" + h + showSequence(t)
+      case Sequence.Cons(h, t) => "|" + h.show() + showSequence(t)
       case Sequence.Nil() => ":"
 
 object ShowableGivenInstances:      
