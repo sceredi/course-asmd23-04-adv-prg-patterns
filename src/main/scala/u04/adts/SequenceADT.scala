@@ -29,6 +29,11 @@ object SequenceADT:
       case Cons(h, t) => concat(mapper(h), t.flatMap(mapper))
       case Nil()      => Nil()
 
+    def filter(predicate: A => Boolean): Sequence[A] = seq match
+      case Cons(h, t) if predicate(h) => Cons(h, t.filter(predicate))
+      case Cons(_, t)                 => t.filter(predicate)
+      case Nil()                      => Nil()
+
   // operations as standard methods
   def concat[A](seq1: Sequence[A], seq2: Sequence[A]): Sequence[A] = seq1 match
     case Cons(h, t) => Cons(h, concat(t, seq2))

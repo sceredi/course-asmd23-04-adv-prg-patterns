@@ -53,3 +53,16 @@ object SequenceADTCheck extends Properties("sequenceADT"):
         case None         => nil()
       seq.flatMap(f) == other
     }
+
+  property("filter identity") = forAll(sequenceGen[Int]) { seq =>
+    seq.filter(_ => true) == seq
+  }
+
+  property("filter general") =
+    forAll(sequenceGen[Int], ((el: Int) => el % 2 == 0)) { (seq, p) =>
+      val other = uncons(seq) match
+        case Some((h, t)) if p(h) => cons(h, t.filter(p))
+        case Some((_, t))         => t.filter(p)
+        case None                 => nil()
+      seq.filter(p) == other
+    }
