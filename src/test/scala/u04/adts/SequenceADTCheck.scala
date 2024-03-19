@@ -45,3 +45,11 @@ object SequenceADTCheck extends Properties("sequenceADT"):
   ) { (seq, f, g) =>
     seq.flatMap(f).flatMap(g) == seq.flatMap(el => f(el).flatMap(g))
   }
+
+  property("flatMap general") =
+    forAll(sequenceGen[Int], ((el: Int) => cons(el + 1, nil()))) { (seq, f) =>
+      val other = uncons(seq) match
+        case Some((h, t)) => concat(f(h), t.flatMap(f))
+        case None         => nil()
+      seq.flatMap(f) == other
+    }
