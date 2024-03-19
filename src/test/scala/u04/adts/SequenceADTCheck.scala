@@ -26,6 +26,14 @@ object SequenceADTCheck extends Properties("sequenceADT"):
         seq.map(f).map(g) == seq.map(f andThen g)
     }
 
+  property("map general") = forAll(sequenceGen[Int], ((el: Int) => el + 1)) {
+    (seq, f) =>
+      val other = uncons(seq) match
+        case Some((h, t)) => cons(f(h), t.map(f))
+        case None         => nil()
+      seq.map(f) == other
+  }
+
   property("map flatmap similarity") = forAll(sequenceGen[Int]) { seq =>
     seq.map(_ + 1) == seq.flatMap(el => cons(el + 1, nil()))
   }
