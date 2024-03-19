@@ -14,6 +14,11 @@ object SequenceADT:
   def cons[E](head: E, tail: Sequence[E]): Sequence[E] = Cons(head, tail)
   def nil[E](): Sequence[E] = Nil[E]()
 
+  // destructors
+  def uncons[E](seq: Sequence[E]): Option[(E, Sequence[E])] = seq match
+    case Cons(h, t) => Some((h, t))
+    case Nil()      => None
+
   // operation as extension methods
   extension [A](seq: Sequence[A])
     def map[B](mapper: A => B): Sequence[B] = seq match
