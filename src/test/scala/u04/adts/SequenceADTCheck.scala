@@ -66,3 +66,11 @@ object SequenceADTCheck extends Properties("sequenceADT"):
         case None                 => nil()
       seq.filter(p) == other
     }
+
+  property("fold folds correctly") =
+    forAll(sequenceGen[Int], ((el: Int, acc: Int) => el + acc)) { (seq, op) =>
+      val other = uncons(seq) match
+        case Some((h, t)) => op(h, t.fold(0)(op))
+        case None         => 0
+      seq.fold(0)(op) == other
+    }

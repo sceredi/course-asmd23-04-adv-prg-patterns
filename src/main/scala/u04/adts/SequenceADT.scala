@@ -34,6 +34,10 @@ object SequenceADT:
       case Cons(_, t)                 => t.filter(predicate)
       case Nil()                      => Nil()
 
+    def fold[B](base: B)(op: (A, B) => B): B = seq match
+      case Cons(h, t) => op(h, t.fold(base)(op))
+      case Nil()      => base
+
   // operations as standard methods
   def concat[A](seq1: Sequence[A], seq2: Sequence[A]): Sequence[A] = seq1 match
     case Cons(h, t) => Cons(h, concat(t, seq2))
